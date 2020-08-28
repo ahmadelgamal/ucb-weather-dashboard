@@ -27,7 +27,7 @@ Use the OpenWeather API (Links to an external site.) to retrieve weather data fo
 ## Mock-Up
 The following image shows the web application's appearance and functionality:
 
-*weather dashboard demo*
+![weather dashboard demo](../06-server-side-apis-homework-demo.png)
 
 ## Grading Requirements
 This challenge is graded based on the following criteria:
