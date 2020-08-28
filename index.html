@@ -10,37 +10,77 @@
     <header>
       <h1 class="title centered">Weather Dashboard</h1>
     </header>
-    <body>
+
+    <main>
       <div class="grid-container">
-        <div id="search-section left-column">
+        <section class="left-column" id="search-section">
           <h2 id="search-bar-title">Search for a City:</h2>
-          <input type="text" />
-          <button id="search-btn"></button>
+          <input id="search-input" type="text" />
+          <button id="search-btn">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
           <ul id="city-list">
             <li>Austin</li>
             <li>Chicago</li>
             <li>New York</li>
           </ul>
-        </div>
+        </section>
 
-        <div id="results-section right-column">
+        <section class="right-column" id="results-section">
           <div id="city-section">
-            <h2>Atlanta (8/15/2019)</h2>
-          </div>
-          <div id="forecast-section">
-            <h3>5-Day Forecast</h3>
-            <ul id="forecast-list">
-              <li class="forecast-list-item">1</li>
-              <li class="forecast-list-item">2</li>
-              <li class="forecast-list-item">3</li>
-              <li class="forecast-list-item">4</li>
-              <li class="forecast-list-item">5</li>
+            <h2>
+              Atlanta (8/15/2019) <span id="current-weather-icon">icon</span>
+            </h2>
+            <ul id="weather-list">
+              <li id="current-temperature" class="weather-list-item">
+                Temperature:
+              </li>
+              <li id="current-humidity" class="weather-list-item">Humidity:</li>
+              <li id="current-wind-speed" class="weather-list-item">
+                Wind Speed:
+              </li>
+              <li id="current-uv-index" class="weather-list-item">UV Index:</li>
             </ul>
           </div>
-        </div>
+          <div id="forecast-section">
+            <h3 id="forecast-title">5-Day Forecast:</h3>
+            <ul id="forecast-list">
+              <li class="forecast-list-item forecast-card">
+                <h4 class="date">8/16/2019</h4>
+                <p class="forecast-weather-icon">icon</p>
+                <p class="forecast-temp">Temp:</p>
+                <p class="forecast-humidity">Humidity:</p>
+              </li>
+              <li class="forecast-list-item forecast-card">
+                <h4 class="date">8/17/2019</h4>
+                <p class="forecast-weather-icon">icon</p>
+                <p class="forecast-temp">Temp:</p>
+                <p class="forecast-humidity">Humidity:</p>
+              </li>
+              <li class="forecast-list-item forecast-card">
+                <h4 class="date">8/18/2019</h4>
+                <p class="forecast-weather-icon">icon</p>
+                <p class="forecast-temp">Temp:</p>
+                <p class="forecast-humidity">Humidity:</p>
+              </li>
+              <li class="forecast-list-item forecast-card">
+                <h4 class="date">8/19/2019</h4>
+                <p class="forecast-weather-icon">icon</p>
+                <p class="forecast-temp">Temp:</p>
+                <p class="forecast-humidity">Humidity:</p>
+              </li>
+              <li class="forecast-list-item forecast-card">
+                <h4 class="date">8/20/2019</h4>
+                <p class="weather-icon">icon</p>
+                <p class="forecast-temp">Temp:</p>
+                <p class="forecast-humidity">Humidity:</p>
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
-    </body>
-
+    </main>
+    <script src="https://use.fontawesome.com/ae7c216a3a.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

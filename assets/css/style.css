@@ -1,20 +1,139 @@
+/* GLOBAL STYLING */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
 }
 
+/* HEADER STYLING */
 header h1 {
   padding: 15px;
   background-color: #343a40;
-  color: white;
+  color: #ffffff;
   font-size: 40px;
-  font-weight: 400;
   text-align: center;
 }
 
+/* MAIN STYLING */
+/* use grid display */
 .grid-container {
   display: grid;
+  grid-template-columns: 30% 70%;
 }
 
+/* set main font colors */
+#search-bar-title,
+#city-section h2,
+#forecast-section h3,
+.weather-list-item {
+  color: #212529;
+}
+
+#city-list li {
+  color: #495057;
+}
+
+.forecast-card {
+  color: #ffffff;
+}
+/* end set main font colors */
+
+/* search-section (left-column) styling */
+#search-section {
+  margin-right: 20px;
+  padding: 10px 15px 0px 10px;
+  background-color: #f8f9fa;
+}
+
+#search-bar-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#search-input {
+  height: 35px;
+  font-size: 20px;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+#search-btn {
+  height: 40px;
+  width: 40px;
+  background-color: #007bff;
+  border: 3px solid #8fc4fd;
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+.fa-search {
+  color: white;
+}
+
+#city-list {
+  margin: 15px 0;
+  list-style: none;
+}
+
+#city-list li {
+  padding: 15px;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  background-color: #ffffff;
+}
+
+/* results-section (right-column) styling */
+#city-section {
+  margin-top: 15px;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+#city-section h2 {
+  margin-top: 10px;
+  font-size: 28px;
+}
+
+#weather-list {
+  padding: 20px 0 10px 0;
+}
+
+.weather-list-item {
+  list-style: none;
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+#forecast-title {
+  margin: 20px 0 5px 0;
+  font-size: 24px;
+}
+
+#forecast-list {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  justify-items: start;
+}
+
+.forecast-card {
+  list-style: none;
+  padding: 10px;
+  width: 80%;
+  background-color: #007bff;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.forecast-list-item h4 {
+  font-size: 20px;
+}
+
+.forecast-temp {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
