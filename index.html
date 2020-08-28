@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <title>Weather Dashboard</title>
-</head>
-<body>
-  
-  <script src="./assets/js/script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather Dashboard</title>
+  </head>
+  <body>
+    <header>
+      <h1 class="title centered">Weather Dashboard</h1>
+    </header>
+    <body>
+      <div class="grid-container">
+        <div id="search-section left-column">
+          <h2 id="search-bar-title">Search for a City:</h2>
+          <input type="text" />
+          <button id="search-btn"></button>
+          <ul id="city-list">
+            <li>Austin</li>
+            <li>Chicago</li>
+            <li>New York</li>
+          </ul>
+        </div>
+
+        <div id="results-section right-column">
+          <div id="city-section">
+            <h2>Atlanta (8/15/2019)</h2>
+          </div>
+          <div id="forecast-section">
+            <h3>5-Day Forecast</h3>
+            <ul id="forecast-list">
+              <li class="forecast-list-item">1</li>
+              <li class="forecast-list-item">2</li>
+              <li class="forecast-list-item">3</li>
+              <li class="forecast-list-item">4</li>
+              <li class="forecast-list-item">5</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </body>
+
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
