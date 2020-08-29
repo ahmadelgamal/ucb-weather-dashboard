@@ -1,5 +1,4 @@
 /* GLOBAL STYLING */
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,11 +7,26 @@
   font-weight: 400;
 }
 
+:root {
+  --header-bg-color: #343a40;
+  --header-txt-color: #ffffff;
+  --main-txt-color: #212529;
+  --city-list-bg-color: #ffffff;
+  --city-list-txt-color: #495057;
+  --forecast-list-color: #ffffff;
+  --search-section-bg-color: #f8f9fa;
+  --main-border-color:  #dfdfdf;
+  --search-btn-bg-color: #007bff;
+  --search-btn-border-color: #8fc4fd;
+  --forecast-card-border-color: #000000;
+  --forecast-card-bg-color: #007bff;
+}
+
 /* HEADER STYLING */
 header h1 {
   padding: 15px;
-  background-color: #343a40;
-  color: #ffffff;
+  background-color: var(--header-bg-color);
+  color: var(--header-txt-color);
   font-size: 40px;
   text-align: center;
 }
@@ -29,15 +43,15 @@ header h1 {
 #city-section h2,
 #forecast-section h3,
 .weather-list-item {
-  color: #212529;
+  color: var(--main-txt-color);
 }
 
 #city-list li {
-  color: #495057;
+  color:var(--city-list-txt-color);
 }
 
-#forecast-list {
-  color: #ffffff;
+#forecast-card {
+  color: var(--forecast-list-color);
 }
 /* end set main font colors */
 
@@ -45,7 +59,7 @@ header h1 {
 #search-section {
   margin-right: 20px;
   padding: 10px 15px 0px 10px;
-  background-color: #f8f9fa;
+  background-color: var(--search-section-bg-color);
 }
 
 #search-bar-title {
@@ -57,7 +71,7 @@ header h1 {
   height: 35px;
   padding: 0 10px;
   font-size: 20px;
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--main-border-color);
   border-radius: 5px;
   vertical-align: middle;
 }
@@ -65,8 +79,8 @@ header h1 {
 #search-btn {
   height: 40px;
   width: 40px;
-  background-color: #007bff;
-  border: 3px solid #8fc4fd;
+  background-color: var(--search-btn-bg-color);
+  border: 3px solid var(--search-btn-border-color);
   border-radius: 5px;
   vertical-align: middle;
 }
@@ -82,15 +96,15 @@ header h1 {
 
 #city-list li {
   padding: 15px;
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--main-border-color);
   border-radius: 2px;
-  background-color: #ffffff;
+  background-color: var(--city-list-bg-color);
 }
 
 /* results-section (right-column) styling */
 #city-section {
   margin-top: 15px;
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--main-border-color);
   border-radius: 5px;
   padding: 20px;
 }
@@ -120,30 +134,31 @@ header h1 {
   font-size: 24px;
 }
 
-#forecast-list {
+#forecast-card {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
   justify-items: start;
 }
 
-#forecast-list li {
+#forecast-card li {
   list-style: none;
   padding: 10px;
   width: 80%;
-  background-color: #007bff;
-  border: 1px solid black;
+  background-color: var(--forecast-card-bg-color);
+  border: 1px solid var(--forecast-card-border-color);
   border-radius: 5px;
 }
 
-#forecast-list li h4 {
+#forecast-card li h4 {
   font-size: 20px;
 }
 
-.forecast-weather-icon {
+#forecast-card li img {
   display: block;
+  padding-top: 10px;
 }
 
 .forecast-temp {
-  padding-top: 20px;
+  padding-top: 5px;
   padding-bottom: 20px;
 }

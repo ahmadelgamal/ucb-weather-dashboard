@@ -8,7 +8,7 @@ var currentTempEl = document.querySelector("#current-temperature");
 var currentHumidityEl = document.querySelector("#current-humidity");
 var currentWindSpeedEl = document.querySelector("#current-wind-speed");
 var currentUvIndexEl = document.querySelector("#current-uv-index");
-var forecastListEl = document.querySelector("#forecast-list");
+var forecastCardEl = document.querySelector("#forecast-card");
 
 // API Key acquired from https://openweathermap.org (One Call API)
 var apiKey = "ec676b48ec83e5bd9439da43ceadf734";
@@ -111,8 +111,8 @@ var getCityWeather = function (citySearchTerm) {
         forecastListItemEl.appendChild(forecastHumidityEl);
         
         // append forecast list item to forecast list after having adding all content
-        forecastListEl.appendChild(forecastListItemEl);
-        console.log(forecastListEl);
+        forecastCardEl.appendChild(forecastListItemEl);
+        console.log(forecastCardEl);
       }
     });
 };
