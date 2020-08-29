@@ -36,7 +36,7 @@ header h1 {
   color: #495057;
 }
 
-.forecast-card {
+#forecast-list {
   color: #ffffff;
 }
 /* end set main font colors */
@@ -96,8 +96,13 @@ header h1 {
 }
 
 #city-section h2 {
-  margin-top: 10px;
+  display: inline;
   font-size: 28px;
+  vertical-align: middle;
+}
+
+#current-weather-icon {
+  vertical-align: middle;
 }
 
 #weather-list {
@@ -121,7 +126,7 @@ header h1 {
   justify-items: start;
 }
 
-.forecast-card {
+#forecast-list li {
   list-style: none;
   padding: 10px;
   width: 80%;
@@ -130,8 +135,12 @@ header h1 {
   border-radius: 5px;
 }
 
-.forecast-list-item h4 {
+#forecast-list li h4 {
   font-size: 20px;
+}
+
+.forecast-weather-icon {
+  display: block;
 }
 
 .forecast-temp {
