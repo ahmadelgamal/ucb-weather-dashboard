@@ -55,6 +55,7 @@ header h1 {
 
 #search-input {
   height: 35px;
+  padding: 0 10px;
   font-size: 20px;
   border: 1px solid #dfdfdf;
   border-radius: 5px;
