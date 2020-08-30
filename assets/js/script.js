@@ -61,14 +61,14 @@ var saveCity = function (currentCity) {
 
 // gets api info
 var getCityWeather = function (citySearchTerm) {
-  // resets forecast cards for every new search
-  forecastCardsListEl.innerHTML = "";
-
   // resets seach-form input for every new search
   searchInputEl.value = "";
 
   // resets error message if no city is entered then it is entered
   searchErrorMessageEl.textContent = "";
+
+  // resets forecast cards for every new search
+  forecastCardsListEl.innerHTML = "";
 
   // sets API URL
   var apiUrl =

@@ -69,7 +69,7 @@ header h1 {
 }
 
 #search-input {
-  height: 35px;
+  height: 40px;
   padding: 0 10px;
   font-size: 20px;
   border: 1px solid var(--main-border-color);
@@ -78,11 +78,11 @@ header h1 {
 }
 
 #search-btn {
-  height: 40px;
-  width: 40px;
+  height: 46px;
+  width: 46px;
   background-color: var(--search-btn-bg-color);
   border: 3px solid var(--search-btn-border-color);
-  border-radius: 5px;
+  border-radius: 6px;
   vertical-align: middle;
 }
 
@@ -93,6 +93,7 @@ header h1 {
 #search-error-message {
   margin-top: 10px;
   color: var(--error-message-txt-color);
+  font-size: 16px;
 }
 
 #city-list {
@@ -105,6 +106,7 @@ header h1 {
   border: 1px solid var(--main-border-color);
   border-radius: 2px;
   background-color: var(--city-list-bg-color);
+  font-size: 16px;
 }
 
 /* results-section (right-column) styling */
@@ -130,13 +132,13 @@ header h1 {
 }
 
 #weather-list {
-  padding: 20px 0 10px 0;
+  padding: 10px 0;
 }
 
 .weather-list-item {
   list-style: none;
   padding: 10px 0;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #forecast-title {
