@@ -29,6 +29,13 @@ var searchFormHandler = function (event) {
   }
 };
 
+// event handler for search-form
+var cityListHandler = function (event) {
+  event.preventDefault();
+  var citySearchTerm = event.target.textContent;
+  getCityWeather(citySearchTerm);
+};
+
 // declares an empty array for the city search list
 var searchListArray = [];
 
@@ -168,3 +175,5 @@ var getCityWeather = function (citySearchTerm) {
 
 // event listener for search form
 searchFormEl.addEventListener("submit", searchFormHandler);
+// event listener for search history
+cityListEl.addEventListener("click", cityListHandler);
