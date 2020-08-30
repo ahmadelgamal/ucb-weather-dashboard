@@ -43,7 +43,7 @@ var loadSearchList = function (citySearchList) {
   if (loadedSearchList) {
     cityListEl.innerHTML = "";
     loadedSearchList = JSON.parse(loadedSearchList);
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < loadedSearchList.length && i < 8; i++) {
       var cityListItemEl = document.createElement("li");
       cityListItemEl.innerHTML = loadedSearchList[i];
       cityListEl.appendChild(cityListItemEl);
@@ -51,6 +51,7 @@ var loadSearchList = function (citySearchList) {
     searchListArray = loadedSearchList;
   }
 };
+
 // calls function to load search history from localStorage on refersh
 loadSearchList();
 
