@@ -11,10 +11,17 @@ var currentTempEl = document.querySelector("#current-temperature");
 var currentHumidityEl = document.querySelector("#current-humidity");
 var currentWindSpeedEl = document.querySelector("#current-wind-speed");
 var currentUvIndexEl = document.querySelector("#current-uv-index");
+var currentUvIndexValueEl = document.querySelector("#uv-index-value");
 var forecastCardsListEl = document.querySelector("#forecast-cards-list");
 
-// API Key acquired from https://openweathermap.org (One Call API)
-var apiKey = "ec676b48ec83e5bd9439da43ceadf734";
+// API Key acquired from https://openweathermap.org (5 Day / 3 Hour Forecast)
+var forecastApiKey = "ec676b48ec83e5bd9439da43ceadf734";
+// API Key acquired from https://openweathermap.org (UV Index)
+var uvIndexApiKey = "ce2d1271af9dc8c354dc53ca233a446f";
+
+// declares global variables to store longitude and latitude of currentCity
+var currentLat = 0;
+var currentLon = 0;
 
 // event handler for search-form
 var searchFormHandler = function (event) {
@@ -66,7 +73,32 @@ var saveCity = function (currentCity) {
   loadSearchList();
 };
 
-// gets api info
+// gets uv index info from UV Index API
+var getCityUvIndex = function (currentLat, currentLon) {
+  // sets API URL
+  var apiUrl =
+    // host + path + query
+    "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+    // personal API key
+    uvIndexApiKey +
+    "&lat=" +
+    currentLat +
+    "&lon=" +
+    currentLon;
+
+  // fetches API
+  fetch(apiUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var currentUvIndex = data.value;
+      var currentUvIndexEl
+      currentUvIndexValueEl.innerHTML = currentUvIndex;
+    });
+};
+
+// gets weather info from 5 Day / 3 Hour Forecast API
 var getCityWeather = function (citySearchTerm) {
   // resets seach-form input for every new search
   searchInputEl.value = "";
@@ -86,7 +118,7 @@ var getCityWeather = function (citySearchTerm) {
     // uses Imperial (Fahrenheit) temp instead of Kelvin
     "&units=imperial" +
     "&appid=" +
-    apiKey;
+    forecastApiKey;
 
   // fetches API
   fetch(apiUrl)
@@ -101,7 +133,10 @@ var getCityWeather = function (citySearchTerm) {
       var currentTemperature = data.list[0].main.temp;
       var currentHumidity = data.list[0].main.humidity;
       var currentWindSpeed = data.list[0].wind.speed;
-      // var currentUvIndex = data.list[0].wind.speed;
+
+      // saves latitude and longitude of current-city to use it to fetch uv index data
+      currentLat = data.city.coord.lat;
+      currentLon = data.city.coord.lon;
 
       // gets date details from from epoch date
       var day = currentEpochDate.getDate();
@@ -119,7 +154,6 @@ var getCityWeather = function (citySearchTerm) {
         "Temperature: " + currentTemperature + " &#176;F";
       currentHumidityEl.innerHTML = "Humidity: " + currentHumidity + "%";
       currentWindSpeedEl.innerHTML = "Wind Speed: " + currentWindSpeed + " MPH";
-      currentUvIndexEl.innerHTML = "UV Index: get UV API";
 
       // updates forecast section with fetched data
       // for loop sets data for each of the forecast cards
@@ -170,6 +204,9 @@ var getCityWeather = function (citySearchTerm) {
     })
     .then(function (currentCity) {
       saveCity(currentCity);
+    })
+    .then(function () {
+      getCityUvIndex(currentLat, currentLon);
     });
 };
 
