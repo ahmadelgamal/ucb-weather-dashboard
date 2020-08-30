@@ -65,7 +65,7 @@ loadSearchList();
 
 // saves searched cities to city list
 var saveCity = function (currentCity) {
-  // Adds current city a beginning of search history
+  // Adds current city to beginning of search history
   searchListArray.unshift(currentCity);
 
   // removes other instance of current city from search history (only the first 8 indeces that are visible)
@@ -74,6 +74,12 @@ var saveCity = function (currentCity) {
       searchListArray.splice(i, 1);
     }
   }
+
+  // removes instance 9 (index 8) from search history list to keep it always 8 in length for memory purposess
+  if (searchListArray.length == 9) {
+    searchListArray.splice(8, 1);
+  }
+
   // changes array to string to save to localStorage
   var searchListString = JSON.stringify(searchListArray);
   // saves string to localStorage
@@ -245,11 +251,9 @@ var getCityWeather = function (citySearchTerm) {
       // increases i by 8 each loop because data is every 3 hours and we want every 24 hours
       // i < 40 because 40/8 = 5 (days)
       for (var i = 1; i < 40; i += 8) {
-        console.log(i);
         var forecastEpochDate = new Date(data.list[i].dt * 1000);
         var forecastIcon = data.list[i].weather[0].icon;
         var forecastTemperature = data.list[i].main.temp;
-        console.log(forecastTemperature);
         var forecastHumidity = data.list[i].main.humidity;
 
         // gets date from epoch date
