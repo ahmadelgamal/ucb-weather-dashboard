@@ -11,7 +11,7 @@ var currentTempEl = document.querySelector("#current-temperature");
 var currentHumidityEl = document.querySelector("#current-humidity");
 var currentWindSpeedEl = document.querySelector("#current-wind-speed");
 var currentUvIndexEl = document.querySelector("#current-uv-index");
-var currentUvIndexValueEl = document.querySelector("#uv-index-value");
+var currentUvIndexValueEl = document.querySelector("#current-uv-index-value");
 var forecastCardsListEl = document.querySelector("#forecast-cards-list");
 
 // API Key acquired from https://openweathermap.org
@@ -91,7 +91,7 @@ var getCityUvIndex = function (currentLat, currentLon) {
     })
     .then(function (data) {
       var currentUvIndex = data.value;
-      var currentUvIndexEl
+      var currentUvIndexEl;
       currentUvIndexValueEl.innerHTML = currentUvIndex;
     });
 };
@@ -131,6 +131,83 @@ var getCityWeather = function (citySearchTerm) {
       var currentTemperature = data.list[0].main.temp;
       var currentHumidity = data.list[0].main.humidity;
       var currentWindSpeed = data.list[0].wind.speed;
+
+      // decides type of weather condition for background color of UV Index
+      var currentWeatherConditions = data.list[0].weather[0].id;
+      // For favorable weather conditions
+      if (
+        currentWeatherConditions == 701 ||
+        currentWeatherConditions == 721 ||
+        currentWeatherConditions == 800 ||
+        currentWeatherConditions == 801 ||
+        currentWeatherConditions == 802 ||
+        currentWeatherConditions == 803 ||
+        currentWeatherConditions == 804
+      ) {
+        currentUvIndexValueEl.style.backgroundColor = "green";
+        currentUvIndexValueEl.style.color = "#ffffff";
+        // For moderate weather conditions
+      } else if (
+        currentWeatherConditions == 300 ||
+        currentWeatherConditions == 301 ||
+        currentWeatherConditions == 302 ||
+        currentWeatherConditions == 311 ||
+        currentWeatherConditions == 500 ||
+        currentWeatherConditions == 501 ||
+        currentWeatherConditions == 600 ||
+        currentWeatherConditions == 601 ||
+        currentWeatherConditions == 612 ||
+        currentWeatherConditions == 615 ||
+        currentWeatherConditions == 620 ||
+        currentWeatherConditions == 731 ||
+        currentWeatherConditions == 741
+      ) {
+        currentUvIndexValueEl.style.backgroundColor = "yellow";
+        currentUvIndexValueEl.style.color = "#000000";
+        // For severe weather conditions
+      } else if (
+        currentWeatherConditions == 200 ||
+        currentWeatherConditions == 201 ||
+        currentWeatherConditions == 202 ||
+        currentWeatherConditions == 210 ||
+        currentWeatherConditions == 211 ||
+        currentWeatherConditions == 212 ||
+        currentWeatherConditions == 221 ||
+        currentWeatherConditions == 230 ||
+        currentWeatherConditions == 231 ||
+        currentWeatherConditions == 232 ||
+        currentWeatherConditions == 312 ||
+        currentWeatherConditions == 313 ||
+        currentWeatherConditions == 314 ||
+        currentWeatherConditions == 321 ||
+        currentWeatherConditions == 502 ||
+        currentWeatherConditions == 503 ||
+        currentWeatherConditions == 504 ||
+        currentWeatherConditions == 511 ||
+        currentWeatherConditions == 520 ||
+        currentWeatherConditions == 521 ||
+        currentWeatherConditions == 522 ||
+        currentWeatherConditions == 531 ||
+        currentWeatherConditions == 602 ||
+        currentWeatherConditions == 611 ||
+        currentWeatherConditions == 613 ||
+        currentWeatherConditions == 616 ||
+        currentWeatherConditions == 621 ||
+        currentWeatherConditions == 622 ||
+        currentWeatherConditions == 711 ||
+        currentWeatherConditions == 751 ||
+        currentWeatherConditions == 761 ||
+        currentWeatherConditions == 762 ||
+        currentWeatherConditions == 771 ||
+        currentWeatherConditions == 781
+      ) {
+        currentUvIndexValueEl.style.backgroundColor = "#dc3545"; //red color
+        currentUvIndexValueEl.style.color = "#ffffff";
+        // For unknown weather conditions
+      } else {
+        currentUvIndexValueEl.style.backgroundColor = "#000000"; // black color
+        currentUvIndexValueEl.style.color = "#ffffff";
+      }
 
       // saves latitude and longitude of current-city to use it to fetch uv index data
       currentLat = data.city.coord.lat;

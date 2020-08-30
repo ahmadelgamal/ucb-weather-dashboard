@@ -141,11 +141,9 @@ header h1 {
   font-size: 16px;
 }
 
-#uv-index-value {
-  background-color: #dc3545;
+#current-uv-index-value {
   padding: 7px;
   border-radius: 3px;
-  color: var(--forecast-list-color);
 }
 
 #forecast-title {
