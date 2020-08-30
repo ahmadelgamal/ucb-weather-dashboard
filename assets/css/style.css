@@ -11,8 +11,8 @@
   --header-bg-color: #343a40;
   --header-txt-color: #ffffff;
   --main-txt-color: #212529;
-  --city-list-bg-color: #ffffff;
-  --city-list-txt-color: #495057;
+  --search-history-bg-color: #ffffff;
+  --search-history-txt-color: #495057;
   --forecast-list-color: #ffffff;
   --search-section-bg-color: #f8f9fa;
   --main-border-color: #dfdfdf;
@@ -47,8 +47,8 @@ header h1 {
   color: var(--main-txt-color);
 }
 
-#city-list li {
-  color: var(--city-list-txt-color);
+#search-history li {
+  color: var(--search-history-txt-color);
 }
 
 #forecast-cards-list {
@@ -96,16 +96,16 @@ header h1 {
   font-size: 16px;
 }
 
-#city-list {
+#search-history {
   margin: 15px 0;
   list-style: none;
 }
 
-#city-list li {
+#search-history li {
   padding: 15px;
   border: 1px solid var(--main-border-color);
   border-radius: 2px;
-  background-color: var(--city-list-bg-color);
+  background-color: var(--search-history-bg-color);
   font-size: 16px;
 }
 

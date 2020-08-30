@@ -2,7 +2,7 @@
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var searchErrorMessageEl = document.querySelector("#search-error-message");
-var cityListEl = document.querySelector("#city-list");
+var searchHistoryEl = document.querySelector("#search-history");
 var rightColumnEl = document.querySelector(".right-column");
 var cityNameEl = document.querySelector("#city-name");
 var currentDateEl = document.querySelector("#current-date");
@@ -30,7 +30,7 @@ var searchFormHandler = function (event) {
 };
 
 // event handler for search-form
-var cityListHandler = function (event) {
+var searchHistoryHandler = function (event) {
   event.preventDefault();
   var citySearchTerm = event.target.textContent;
   getCityWeather(citySearchTerm);
@@ -44,12 +44,12 @@ var searchListArray = [];
 var loadSearchList = function (citySearchList) {
   var loadedSearchList = window.localStorage.getItem("citySearchListLS");
   if (loadedSearchList) {
-    cityListEl.innerHTML = "";
+    searchHistoryEl.innerHTML = "";
     loadedSearchList = JSON.parse(loadedSearchList);
     for (i = 0; i < loadedSearchList.length && i < 8; i++) {
-      var cityListItemEl = document.createElement("li");
-      cityListItemEl.innerHTML = loadedSearchList[i];
-      cityListEl.appendChild(cityListItemEl);
+      var searchHistoryItemEl = document.createElement("li");
+      searchHistoryItemEl.innerHTML = loadedSearchList[i];
+      searchHistoryEl.appendChild(searchHistoryItemEl);
     }
     searchListArray = loadedSearchList;
   }
@@ -176,4 +176,4 @@ var getCityWeather = function (citySearchTerm) {
 // event listener for search form
 searchFormEl.addEventListener("submit", searchFormHandler);
 // event listener for search history
-cityListEl.addEventListener("click", cityListHandler);
+searchHistoryEl.addEventListener("click", searchHistoryHandler);
