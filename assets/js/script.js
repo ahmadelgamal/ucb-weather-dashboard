@@ -1,6 +1,7 @@
 // declares variables to represent elements and buttons on site
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
+var searchErrorMessageEl = document.querySelector("#search-error-message");
 var cityListEl = document.querySelector("#city-list");
 var rightColumnEl = document.querySelector(".right-column");
 var cityNameEl = document.querySelector("#city-name");
@@ -22,14 +23,9 @@ var searchFormHandler = function (event) {
   if (citySearchTerm) {
     getCityWeather(citySearchTerm);
 
-    // resets seach-form input for every new search
-    citySearchTerm.value = "";
-
     // error message if no city is entered
   } else {
-    var searchErrorMessageEl = document.createElement("p");
-    searchErrorMessageEl.innerText = "Please enter a city name";
-    searchFormEl.appendChild(searchErrorMessageEl);
+    searchErrorMessageEl.textContent = "Please enter a city name";
   }
 };
 
@@ -67,6 +63,12 @@ var saveCity = function (currentCity) {
 var getCityWeather = function (citySearchTerm) {
   // resets forecast cards for every new search
   forecastCardsListEl.innerHTML = "";
+
+  // resets seach-form input for every new search
+  searchInputEl.value = "";
+
+  // resets error message if no city is entered then it is entered
+  searchErrorMessageEl.textContent = "";
 
   // sets API URL
   var apiUrl =
