@@ -68,8 +68,9 @@ var saveCity = function (currentCity) {
   // Adds current city to beginning of search history
   searchListArray.unshift(currentCity);
 
-  // removes other instance of current city from search history (only the first 8 indeces that are visible)
-  for (var i = 1; i < 8; i++) {
+  // removes other instance of current city from search history
+  for (var i = 1; i < searchListArray.length; i++) {
+    // for (var i = 1; i < 8 && i < searchListArray.length; i++) {
     if (searchListArray[i] == currentCity) {
       searchListArray.splice(i, 1);
     }
