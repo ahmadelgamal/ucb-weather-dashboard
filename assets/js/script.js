@@ -2,6 +2,7 @@
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var cityListEl = document.querySelector("#city-list");
+var rightColumnEl = document.querySelector(".right-column");
 var cityNameEl = document.querySelector("#city-name");
 var currentDateEl = document.querySelector("#current-date");
 var currentIconEl = document.querySelector("#current-weather-icon");
@@ -32,22 +33,36 @@ var searchFormHandler = function (event) {
   }
 };
 
+// declares an empty array for the city search list
+var searchListArray = [];
+
+// // loads city list from localStorage
+// // only last 8 cities will load
+var loadSearchList = function (citySearchList) {
+  var loadedSearchList = window.localStorage.getItem("citySearchListLS");
+  if (loadedSearchList) {
+    cityListEl.innerHTML = "";
+    loadedSearchList = JSON.parse(loadedSearchList);
+    for (i = 0; i < 8; i++) {
+      var cityListItemEl = document.createElement("li");
+      cityListItemEl.innerHTML = loadedSearchList[i];
+      cityListEl.appendChild(cityListItemEl);
+    }
+    searchListArray = loadedSearchList;
+  }
+};
+// calls function to load search history from localStorage on refersh
+loadSearchList();
+
 // saves searched cities to city list
-var citySearchCounter = 0; // used for localStorage of search list
 var saveCity = function (currentCity) {
-  window.localStorage.setItem(citySearchCounter, currentCity);
-
-  // adds new city to search list
-  var addToList = window.localStorage.getItem(citySearchCounter);
-  var cityListItem = document.createElement("li");
-  cityListItem.innerHTML = addToList;
-  cityListEl.appendChild(cityListItem);
-
-  // prepares counter for next search
-  citySearchCounter++;
+  searchListArray.unshift(currentCity);
+  var searchListString = JSON.stringify(searchListArray);
+  window.localStorage.setItem("citySearchListLS", searchListString);
+  loadSearchList();
 };
 
-// get api info
+// gets api info
 var getCityWeather = function (citySearchTerm) {
   // resets forecast cards for every new search
   forecastCardsListEl.innerHTML = "";
@@ -63,7 +78,7 @@ var getCityWeather = function (citySearchTerm) {
     "&appid=" +
     apiKey;
 
-  // fetch API
+  // fetches API
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
@@ -137,6 +152,9 @@ var getCityWeather = function (citySearchTerm) {
 
         // appends forecast card to forecast cards list after having adding all content
         forecastCardsListEl.appendChild(forecastCardEl);
+
+        // displays right-column
+        rightColumnEl.style.display = "initial";
       }
       return currentCity;
     })

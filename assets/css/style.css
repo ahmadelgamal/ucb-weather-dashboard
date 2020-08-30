@@ -20,6 +20,7 @@
   --search-btn-border-color: #8fc4fd;
   --forecast-cards-border-color: #000000;
   --forecast-cards-bg-color: #007bff;
+  --error-message-txt-color: #ff0000;
 }
 
 /* HEADER STYLING */
@@ -89,6 +90,11 @@ header h1 {
   color: white;
 }
 
+#search-form p {
+  margin-top: 10px;
+  color: var(--error-message-txt-color);
+}
+
 #city-list {
   margin: 15px 0;
   list-style: none;
@@ -102,6 +108,10 @@ header h1 {
 }
 
 /* results-section (right-column) styling */
+.right-column {
+  display: none;
+}
+
 #city-section {
   margin-top: 15px;
   border: 1px solid var(--main-border-color);
