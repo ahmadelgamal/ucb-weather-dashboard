@@ -76,7 +76,7 @@ var getCityUvIndex = function (currentLat, currentLon) {
   // sets API URL
   var apiUrl =
     // host + path + query
-    "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+    "https://api.openweathermap.org/data/2.5/uvi?appid=" +
     // personal API key
     forecastApiKey +
     "&lat=" +
