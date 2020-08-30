@@ -235,9 +235,11 @@ var getCityWeather = function (citySearchTerm) {
       // increases i by 8 each loop because data is every 3 hours and we want every 24 hours
       // i < 40 because 40/8 = 5 (days)
       for (var i = 1; i < 40; i += 8) {
+        console.log(i);
         var forecastEpochDate = new Date(data.list[i].dt * 1000);
         var forecastIcon = data.list[i].weather[0].icon;
         var forecastTemperature = data.list[i].main.temp;
+        console.log(forecastTemperature);
         var forecastHumidity = data.list[i].main.humidity;
 
         // gets date from epoch date
@@ -257,16 +259,16 @@ var getCityWeather = function (citySearchTerm) {
         var forecastWeatherIconEl = document.createElement("img");
         // forecastWeatherIconEl.src = "https://openweathermap.org/img/w/" + currentIcon + ".png";
         forecastWeatherIconEl.src =
-          "https://openweathermap.org/img/wn/" + currentIcon + ".png";
+          "https://openweathermap.org/img/wn/" + forecastIcon + ".png";
         forecastCardEl.appendChild(forecastWeatherIconEl);
 
         var forecastTempEl = document.createElement("p");
         forecastTempEl.className = "forecast-temp";
-        forecastTempEl.innerHTML = "Temp: " + currentTemperature + " &#176;F";
+        forecastTempEl.innerHTML = "Temp: " + forecastTemperature + " &#176;F";
         forecastCardEl.appendChild(forecastTempEl);
 
         var forecastHumidityEl = document.createElement("p");
-        forecastHumidityEl.innerHTML = "Humidity: " + currentHumidity + "%";
+        forecastHumidityEl.innerHTML = "Humidity: " + forecastHumidity + "%";
         forecastCardEl.appendChild(forecastHumidityEl);
 
         // appends forecast card to forecast cards list after having adding all content
