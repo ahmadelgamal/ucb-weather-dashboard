@@ -14,10 +14,8 @@ var currentUvIndexEl = document.querySelector("#current-uv-index");
 var currentUvIndexValueEl = document.querySelector("#uv-index-value");
 var forecastCardsListEl = document.querySelector("#forecast-cards-list");
 
-// API Key acquired from https://openweathermap.org (5 Day / 3 Hour Forecast)
+// API Key acquired from https://openweathermap.org
 var forecastApiKey = "ec676b48ec83e5bd9439da43ceadf734";
-// API Key acquired from https://openweathermap.org (UV Index)
-var uvIndexApiKey = "ce2d1271af9dc8c354dc53ca233a446f";
 
 // declares global variables to store longitude and latitude of currentCity
 var currentLat = 0;
@@ -80,7 +78,7 @@ var getCityUvIndex = function (currentLat, currentLon) {
     // host + path + query
     "http://api.openweathermap.org/data/2.5/uvi?appid=" +
     // personal API key
-    uvIndexApiKey +
+    forecastApiKey +
     "&lat=" +
     currentLat +
     "&lon=" +
