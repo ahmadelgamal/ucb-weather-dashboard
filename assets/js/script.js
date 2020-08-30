@@ -65,8 +65,18 @@ loadSearchList();
 
 // saves searched cities to city list
 var saveCity = function (currentCity) {
+  // Adds current city a beginning of search history
   searchListArray.unshift(currentCity);
+
+  // removes other instance of current city from search history (only the first 8 indeces that are visible)
+  for (var i = 1; i < 8; i++) {
+    if (searchListArray[i] == currentCity) {
+      searchListArray.splice(i, 1);
+    }
+  }
+  // changes array to string to save to localStorage
   var searchListString = JSON.stringify(searchListArray);
+  // saves string to localStorage
   window.localStorage.setItem("citySearchListLS", searchListString);
   loadSearchList();
 };
