@@ -238,6 +238,8 @@ var getCityWeather = function (citySearchTerm) {
     .then(function (response) {
       // If fetch request was successful (returns value in the 200s)
       if (response.ok) {
+        //once successful, saves city search term to currentCity to it can be saved to search history
+        currentCity = citySearchTerm;
         return response.json();
         // If fetch request was unsuccessful (returns value in the 400s)
       } else {
@@ -358,12 +360,12 @@ var analyzeWeatherConditions = function (currentWeatherCondition) {
 /* -------------------- BEGINS DISPLAY WEATHER -------------------- */
 /* ---------- writes today's current data from fetch reponse to html ---------- */
 var displayCurrentWeather = function (data) {
-  /* gets proper city name spelling as per openweathermap.org (OWM) database
-  please note that there is a potential error, 
-  because although OWM database has proper spelling,
-  if you search for a city using the same proper spelling
-  there is a chance that you may not find it, such as "Aswan" */
-  currentCity = data.name;
+  /* initially I tried getting the city name spelling from the openweathermap.org (OWM) database
+  however, I noticed a potential error, because OWM database uses special characters for some cities, such as "Aswan" (Aswān)
+  if you search for a city using its special-character spelling, the database will not find the city!
+  so I decided to use the OWM spelling in the right column and the user input in the left columm
+  however, the system converts the user input to uppercase first letter, of each word, and the rest to lowercase */
+  currentCityName = data.name;
 
   // gets current epoch date and converts it to web-design format
   var currentEpochDate = new Date();
@@ -380,7 +382,7 @@ var displayCurrentWeather = function (data) {
   analyzeWeatherConditions(currentWeatherCondition);
 
   /* ---------- updates city section with fetched data ---------- */
-  cityNameEl.innerHTML = currentCity;
+  cityNameEl.innerHTML = currentCityName;
   currentDateEl.innerHTML = currentDate;
   currentIconEl.src = iconPath + currentIcon + ".png";
   currentTempEl.innerHTML = "Temperature: " + currentTemperature + " &#176;F";
