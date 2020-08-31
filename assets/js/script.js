@@ -1,4 +1,5 @@
-// declares variables to represent elements and buttons on site
+// -------------------- BEGIN GLOBAL VARIABLE DECLARATIONS -------------------- //
+// ---------- declares variables that represent elements on site ---------- //
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var searchErrorMessageEl = document.querySelector("#search-error-message");
@@ -14,6 +15,7 @@ var currentUvIndexEl = document.querySelector("#current-uv-index");
 var currentUvIndexValueEl = document.querySelector("#current-uv-index-value");
 var forecastCardsListEl = document.querySelector("#forecast-cards-list");
 
+// ---------- declares other global variables ---------- //
 // API Key acquired from https://openweathermap.org
 var forecastApiKey = "ec676b48ec83e5bd9439da43ceadf734";
 
@@ -21,7 +23,12 @@ var forecastApiKey = "ec676b48ec83e5bd9439da43ceadf734";
 var currentLat = 0;
 var currentLon = 0;
 
-// event handler for search-form
+// declares an empty array for the city search list
+var searchListArray = [];
+// -------------------- END GLOBAL VARIABLE DECLARATIONS -------------------- //
+
+// -------------------- BEGIN EVENT HANDLERS -------------------- //
+// ---------- event handler for search-form ---------- //
 var searchFormHandler = function (event) {
   event.preventDefault();
   var citySearchTerm = searchInputEl.value.trim();
@@ -34,24 +41,23 @@ var searchFormHandler = function (event) {
   }
 };
 
-// event handler for search-form
+// ---------- event handler for search-history list items ---------- //
 var searchHistoryHandler = function (event) {
   event.preventDefault();
   var citySearchTerm = event.target.textContent;
   getCityWeather(citySearchTerm);
 };
+// -------------------- END EVENT HANDLERS -------------------- //
 
-// declares an empty array for the city search list
-var searchListArray = [];
-
-// // loads city list from localStorage
-// // only last 8 cities will load
+// -------------------- BEGIN LOCALSTORAGE -------------------- //
+// ---------- loads city list from localStorage ---------- //
 var loadSearchList = function (citySearchList) {
   var loadedSearchList = window.localStorage.getItem("citySearchListLS");
   if (loadedSearchList) {
     searchHistoryEl.innerHTML = "";
     loadedSearchList = JSON.parse(loadedSearchList);
-    for (i = 0; i < loadedSearchList.length && i < 8; i++) {
+    for (i = 0; i < loadedSearchList.length; i++) {
+      // for (i = 0; i < loadedSearchList.length && i < 8; i++) {
       var searchHistoryItemEl = document.createElement("li");
       searchHistoryItemEl.innerHTML = loadedSearchList[i];
       searchHistoryEl.appendChild(searchHistoryItemEl);
@@ -63,25 +69,34 @@ var loadSearchList = function (citySearchList) {
 // calls function to load search history from localStorage on refersh
 loadSearchList();
 
-// saves searched cities to city list
+// ---------- saves city list to localStorage ---------- //
+// saves currentCity to city list
 var saveCity = function (currentCity) {
-  // Adds current city a beginning of search history
+  // Adds current city to beginning of search history
   searchListArray.unshift(currentCity);
 
-  // removes other instance of current city from search history (only the first 8 indeces that are visible)
-  for (var i = 1; i < 8; i++) {
+  // removes other instance of current city from search history
+  for (var i = 1; i < searchListArray.length; i++) {
     if (searchListArray[i] == currentCity) {
       searchListArray.splice(i, 1);
     }
   }
+
+  // removes instance 9 (index 8) from search history list to keep it always 8 in length for memory purposess
+  if (searchListArray.length == 9) {
+    searchListArray.splice(8, 1);
+  }
+
   // changes array to string to save to localStorage
   var searchListString = JSON.stringify(searchListArray);
   // saves string to localStorage
   window.localStorage.setItem("citySearchListLS", searchListString);
   loadSearchList();
 };
+// -------------------- END LOCALSTORAGE -------------------- //
 
-// gets uv index info from UV Index API
+// -------------------- BEGIN FETCH -------------------- //
+// ---------- gets uv index info from "UV Index" API ---------- //
 var getCityUvIndex = function (currentLat, currentLon) {
   // sets API URL
   var apiUrl =
@@ -106,7 +121,7 @@ var getCityUvIndex = function (currentLat, currentLon) {
     });
 };
 
-// gets weather info from 5 Day / 3 Hour Forecast API
+// ---------- gets weather info from "5 Day / 3 Hour Forecast" API ---------- //
 var getCityWeather = function (citySearchTerm) {
   // resets seach-form input for every new search
   searchInputEl.value = "";
@@ -265,18 +280,17 @@ var getCityWeather = function (citySearchTerm) {
         forecastCardEl.appendChild(forecastDateEl);
 
         var forecastWeatherIconEl = document.createElement("img");
-        // forecastWeatherIconEl.src = "https://openweathermap.org/img/w/" + currentIcon + ".png";
         forecastWeatherIconEl.src =
-          "https://openweathermap.org/img/wn/" + currentIcon + ".png";
+          "https://openweathermap.org/img/wn/" + forecastIcon + ".png";
         forecastCardEl.appendChild(forecastWeatherIconEl);
 
         var forecastTempEl = document.createElement("p");
         forecastTempEl.className = "forecast-temp";
-        forecastTempEl.innerHTML = "Temp: " + currentTemperature + " &#176;F";
+        forecastTempEl.innerHTML = "Temp: " + forecastTemperature + " &#176;F";
         forecastCardEl.appendChild(forecastTempEl);
 
         var forecastHumidityEl = document.createElement("p");
-        forecastHumidityEl.innerHTML = "Humidity: " + currentHumidity + "%";
+        forecastHumidityEl.innerHTML = "Humidity: " + forecastHumidity + "%";
         forecastCardEl.appendChild(forecastHumidityEl);
 
         // appends forecast card to forecast cards list after having adding all content
@@ -294,8 +308,11 @@ var getCityWeather = function (citySearchTerm) {
       getCityUvIndex(currentLat, currentLon);
     });
 };
+// -------------------- END FETCH -------------------- //
 
-// event listener for search form
+// -------------------- BEGIN EVENT LISTENERS -------------------- //
+// ---------- event listener for search form ---------- //
 searchFormEl.addEventListener("submit", searchFormHandler);
-// event listener for search history
+// ---------- event listener for search history ---------- //
 searchHistoryEl.addEventListener("click", searchHistoryHandler);
+// -------------------- END EVENT LISTENERS -------------------- //
