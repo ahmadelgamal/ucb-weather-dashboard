@@ -115,6 +115,7 @@ header h1 {
   display: none;
 }
 
+/* current weather section */
 #city-section {
   margin-top: 15px;
   border: 1px solid var(--main-border-color);
@@ -147,6 +148,7 @@ header h1 {
   border-radius: 3px;
 }
 
+/* weather forecast section */
 #forecast-title {
   margin: 20px 0 5px 0;
   font-size: 24px;

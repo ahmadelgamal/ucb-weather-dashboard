@@ -13,6 +13,7 @@
 
     <main>
       <div class="grid-container">
+        <!-- left-column -->
         <section class="left-column" id="search-section">
           <form id="search-form">
             <h2 id="search-bar-title">Search for a City:</h2>
@@ -21,10 +22,13 @@
             </button>
           </form>
           <p id="search-error-message"></p>
+          <!-- Search history list -->
           <ul id="search-history"></ul>
         </section>
 
+        <!-- right column -->
         <section class="right-column" id="results-section">
+          <!-- current weather -->
           <div id="city-section">
             <h2 id="city-name"></h2>
             <h2 id="current-date"></h2>
@@ -38,6 +42,8 @@
               </li>
             </ul>
           </div>
+
+          <!-- weather forcast -->
           <div id="forecast-section">
             <h3 id="forecast-title">5-Day Forecast:</h3>
             <ul id="forecast-cards-list"></ul>
@@ -45,6 +51,7 @@
         </section>
       </div>
     </main>
+
     <script src="https://use.fontawesome.com/ae7c216a3a.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>

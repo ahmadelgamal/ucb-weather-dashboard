@@ -130,8 +130,8 @@ var saveCity = function () {
 /* -------------------- ENDS LOCALSTORAGE -------------------- */
 
 /* -------------------- BEGINS FETCH -------------------- */
-/* ---------- writes today's current data from fetch reponse ---------- */
-var writeCurrentWeather = function (data) {
+/* ---------- writes today's current data from fetch reponse to html ---------- */
+var displayCurrentWeather = function (data) {
   /* gets proper city name spelling as per openweathermap.org (OWM) database
   please note that there is a potential error, 
   because although OWM database has proper spelling,
@@ -259,6 +259,13 @@ var getCityUvIndex = function (currentLat, currentLon) {
       var currentUvIndex = data.value;
       // writes UV Index value to html (span) element
       currentUvIndexValueEl.innerHTML = currentUvIndex;
+    })
+    /* If fetch request was unsuccessful
+    for a reason other than a value in the 400s,
+    i.e. network errors, usually it's a value in the 500s */
+    .catch(function (error) {
+      searchErrorMessageEl.innerHTML =
+        "Network error!<br />Unable to connect to get UV Index!<br />Please check internet connection.";
     });
 };
 
@@ -326,6 +333,13 @@ var getForecastWeather = function (citySearchTerm) {
         // displays right-column (which was set to `display: none` at first visit/refersh)
         rightColumnEl.style.display = "initial";
       }
+    })
+    /* If fetch request was unsuccessful
+    for a reason other than a value in the 400s,
+    i.e. network errors, usually it's a value in the 500s */
+    .catch(function (error) {
+      searchErrorMessageEl.innerHTML =
+        "Network error!<br />Unable to connect to get weather forecast!<br />Please check internet connection.";
     });
 };
 
@@ -365,7 +379,7 @@ var getCityWeather = function (citySearchTerm) {
       // saves latitude and longitude of current-city to use it to fetch uv index data
       currentLat = data.coord.lat;
       currentLon = data.coord.lon;
-      writeCurrentWeather(data);
+      displayCurrentWeather(data);
     })
     // calls function to fetch new data for uv index
     .then(function () {
@@ -378,6 +392,13 @@ var getCityWeather = function (citySearchTerm) {
     // calls function to save current city to search history list
     .then(function () {
       saveCity();
+    })
+    /* If fetch request was unsuccessful
+    for a reason other than a value in the 400s,
+    i.e. network errors, usually it's a value in the 500s */
+    .catch(function (error) {
+      searchErrorMessageEl.innerHTML =
+        "Network error!<br />Unable to connect to get weather data!<br />Please check internet connection.";
     });
 };
 /* -------------------- ENDS FETCH -------------------- */
