@@ -1,5 +1,5 @@
 /* -------------------- BEGINS GLOBAL VARIABLE DECLARATIONS -------------------- */
-/* ---------- declares variables that represent elements on site ---------- */
+/* ---------- declares variables that represent some elements on site ---------- */
 /* left-column elements */
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
@@ -14,7 +14,6 @@ var currentIconEl = document.querySelector("#current-weather-icon");
 var currentTempEl = document.querySelector("#current-temperature");
 var currentHumidityEl = document.querySelector("#current-humidity");
 var currentWindSpeedEl = document.querySelector("#current-wind-speed");
-var currentUvIndexEl = document.querySelector("#current-uv-index");
 var currentUvIndexValueEl = document.querySelector("#current-uv-index-value");
 var forecastCardsListEl = document.querySelector("#forecast-cards-list");
 
