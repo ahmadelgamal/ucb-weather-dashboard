@@ -94,6 +94,7 @@ header h1 {
   margin-top: 10px;
   color: var(--error-message-txt-color);
   font-size: 16px;
+  font-style: italic;
 }
 
 #search-history {
