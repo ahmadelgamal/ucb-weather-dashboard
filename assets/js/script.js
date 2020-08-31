@@ -1,8 +1,12 @@
-// declares variables to represent elements and buttons on site
+/* -------------------- BEGINS GLOBAL VARIABLE DECLARATIONS -------------------- */
+/* ---------- declares variables that represent elements on site ---------- */
+/* left-column elements */
 var searchFormEl = document.querySelector("#search-form");
 var searchInputEl = document.querySelector("#search-input");
 var searchErrorMessageEl = document.querySelector("#search-error-message");
 var searchHistoryEl = document.querySelector("#search-history");
+
+/* right-column elements */
 var rightColumnEl = document.querySelector(".right-column");
 var cityNameEl = document.querySelector("#city-name");
 var currentDateEl = document.querySelector("#current-date");
@@ -14,14 +18,24 @@ var currentUvIndexEl = document.querySelector("#current-uv-index");
 var currentUvIndexValueEl = document.querySelector("#current-uv-index-value");
 var forecastCardsListEl = document.querySelector("#forecast-cards-list");
 
-// API Key acquired from https://openweathermap.org
+/* ---------- declares other global variables ---------- */
+/* API Key acquired from https://openweathermap.org.
+This is a security vulnerability.
+API Keys should not be made public on GitHub because they can be stolen.
+Should be removed and deleted from openweathermaps after assignment is graded. */
 var forecastApiKey = "ec676b48ec83e5bd9439da43ceadf734";
 
-// declares global variables to store longitude and latitude of currentCity
+/* declares global variables to store longitude and latitude of currentCity being searched.
+This is needed to fetch data from "UV Index" API which only uses lat and lon */
 var currentLat = 0;
 var currentLon = 0;
 
-// event handler for search-form
+// declares an empty array for the city search list
+var searchListArray = [];
+/* -------------------- ENDS GLOBAL VARIABLE DECLARATIONS -------------------- */
+
+/* -------------------- BEGINS EVENT HANDLERS -------------------- */
+/* ---------- event handler for search-form ---------- */
 var searchFormHandler = function (event) {
   event.preventDefault();
   var citySearchTerm = searchInputEl.value.trim();
@@ -34,86 +48,117 @@ var searchFormHandler = function (event) {
   }
 };
 
-// event handler for search-form
+/* ---------- event handler for search-history list items ---------- */
 var searchHistoryHandler = function (event) {
   event.preventDefault();
   var citySearchTerm = event.target.textContent;
   getCityWeather(citySearchTerm);
 };
+/* -------------------- ENDS EVENT HANDLERS -------------------- */
 
-// declares an empty array for the city search list
-var searchListArray = [];
-
-// // loads city list from localStorage
-// // only last 8 cities will load
+/* -------------------- BEGINS LOCALSTORAGE -------------------- */
+/* ---------- loads search history from localStorage ---------- */
 var loadSearchList = function (citySearchList) {
+  // loads search history list from locaStorage
   var loadedSearchList = window.localStorage.getItem("citySearchListLS");
+
+  // checks to see is there is an existing search history list
   if (loadedSearchList) {
+    // resets the search history element on first visit and refresh in order to rewrite it from localStorage
     searchHistoryEl.innerHTML = "";
+
+    // parses the search list loaded from localStorage into an array instead of a string
     loadedSearchList = JSON.parse(loadedSearchList);
-    for (i = 0; i < loadedSearchList.length && i < 8; i++) {
+
+    // creates a list item for each city in search history and appends it to the search history list
+    for (i = 0; i < loadedSearchList.length; i++) {
       var searchHistoryItemEl = document.createElement("li");
       searchHistoryItemEl.innerHTML = loadedSearchList[i];
       searchHistoryEl.appendChild(searchHistoryItemEl);
     }
+
+    // saves the loaded search list to the global array `searchListArray` in order to use it in `saveCity` function
     searchListArray = loadedSearchList;
   }
 };
 
-// calls function to load search history from localStorage on refersh
+// calls function to load search history from localStorage on first visit and refersh
 loadSearchList();
 
-// saves searched cities to city list
+/* ---------- saves search history list to localStorage ---------- */
+// saves currentCity to search history
 var saveCity = function (currentCity) {
   // Adds current city to beginning of search history
   searchListArray.unshift(currentCity);
 
   // removes other instance of current city from search history
   for (var i = 1; i < searchListArray.length; i++) {
+<<<<<<< HEAD
     // for (var i = 1; i < 8 && i < searchListArray.length; i++) {
+=======
+>>>>>>> develop
     if (searchListArray[i] == currentCity) {
       searchListArray.splice(i, 1);
     }
   }
 
+<<<<<<< HEAD
   // removes instance 9 (index 8) from search history list to keep it always 8 in length for memory purposess
+=======
+  // removes instance 9 (index 8) from search history list to keep it always 8 in length for memory purposes
+>>>>>>> develop
   if (searchListArray.length == 9) {
     searchListArray.splice(8, 1);
   }
 
+<<<<<<< HEAD
   // changes array to string to save to localStorage
+=======
+  // converts the array of searchList into a string to save to localStorage
+>>>>>>> develop
   var searchListString = JSON.stringify(searchListArray);
-  // saves string to localStorage
+  // saves string of search history to localStorage
   window.localStorage.setItem("citySearchListLS", searchListString);
+
+  // calls function to reload search history from localStorage on save
   loadSearchList();
 };
+/* -------------------- ENDS LOCALSTORAGE -------------------- */
 
-// gets uv index info from UV Index API
+/* -------------------- BEGINS FETCH -------------------- */
+/* ---------- gets uv index value from "UV Index" API ---------- */
 var getCityUvIndex = function (currentLat, currentLon) {
   // sets API URL
   var apiUrl =
+<<<<<<< HEAD
     // host + path + query
     "https://api.openweathermap.org/data/2.5/uvi?appid=" +
+=======
+    // host + path
+    "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+>>>>>>> develop
     // personal API key
     forecastApiKey +
+    // search using latitude and longitude of currentCity (acquired from other API)
     "&lat=" +
     currentLat +
     "&lon=" +
     currentLon;
 
-  // fetches API
+  // fetches data
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
+      // gets UV Index from data
       var currentUvIndex = data.value;
-      var currentUvIndexEl;
+      // writes UV Index value to html element
       currentUvIndexValueEl.innerHTML = currentUvIndex;
     });
 };
 
-// gets weather info from 5 Day / 3 Hour Forecast API
+/* ---------- gets weather info from "5 Day / 3 Hour Forecast" API ---------- */
 var getCityWeather = function (citySearchTerm) {
   // resets seach-form input for every new search
   searchInputEl.value = "";
@@ -272,7 +317,6 @@ var getCityWeather = function (citySearchTerm) {
         forecastCardEl.appendChild(forecastDateEl);
 
         var forecastWeatherIconEl = document.createElement("img");
-        // forecastWeatherIconEl.src = "https://openweathermap.org/img/w/" + currentIcon + ".png";
         forecastWeatherIconEl.src =
           "https://openweathermap.org/img/wn/" + forecastIcon + ".png";
         forecastCardEl.appendChild(forecastWeatherIconEl);
@@ -301,8 +345,11 @@ var getCityWeather = function (citySearchTerm) {
       getCityUvIndex(currentLat, currentLon);
     });
 };
+/* -------------------- ENDS FETCH -------------------- */
 
-// event listener for search form
+/* -------------------- BEGINS EVENT LISTENERS -------------------- */
+/* ---------- event listener for search form ---------- */
 searchFormEl.addEventListener("submit", searchFormHandler);
-// event listener for search history
+/* ---------- event listener for search history ---------- */
 searchHistoryEl.addEventListener("click", searchHistoryHandler);
+/* -------------------- ENDS EVENT LISTENERS -------------------- */
