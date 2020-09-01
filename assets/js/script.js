@@ -136,7 +136,9 @@ var resets = function () {
 /* ---------- search-form event handler ---------- */
 var searchFormHandler = function (event) {
   event.preventDefault();
-  var citySearchTerm = searchInputEl.value.trim();
+  // trims any empty spaces from the search field input and converts it to lowercase
+  var citySearchTerm = searchInputEl.value.trim().toLowerCase();
+  console.log(citySearchTerm);
   if (citySearchTerm) {
     getCityWeather(citySearchTerm);
 
